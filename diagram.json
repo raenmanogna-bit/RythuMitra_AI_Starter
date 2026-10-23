@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "author": "RythuMitra AI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "moisture_sensor", "top": -80, "left": 150, "attrs": {} },
+    { "type": "wokwi-led", "id": "pump_led", "top": 100, "left": 150, "attrs": { "color": "blue" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 140, "left": 150, "attrs": { "value": "330" } },
+    { "type": "wokwi-pushbutton", "id": "estop_btn", "top": -80, "left": -100, "attrs": { "color": "red" } }
+  ],
+  "connections": [
+    [ "esp:3V3", "moisture_sensor:VCC", "red", [ "v0" ] ],
+    [ "esp:GND", "moisture_sensor:GND", "black", [ "v0" ] ],
+    [ "esp:34", "moisture_sensor:SIG", "green", [ "v0" ] ],
+    [ "esp:2", "pump_led:A", "blue", [ "v0" ] ],
+    [ "pump_led:C", "r1:1", "black", [ "v0" ] ],
+    [ "r1:2", "esp:GND", "black", [ "v0" ] ],
+    [ "esp:12", "estop_btn:1.l", "green", [ "v0" ] ],
+    [ "esp:GND", "estop_btn:2.l", "black", [ "v0" ] ]
+  ]
+}

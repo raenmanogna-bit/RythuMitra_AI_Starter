@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RythuMitra AI — Smart Farming Companion</title>
+<style>
+:root{--green:#176b45;--green2:#218557;--lime:#dff4e7;--ink:#17332a;--muted:#687b72;--bg:#f4f8f5;--line:#dfe9e2;--white:#fff;--amber:#a65c05;--amberbg:#fff3d9;--red:#b42318;--redbg:#ffebe9;--shadow:0 8px 26px rgba(26,74,48,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 14px;font-weight:650}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8bd5ad;outline-offset:2px}
+.topbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3}.topinner{max-width:1220px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:var(--green);display:grid;place-items:center;color:white;font-size:23px}.brand h1{font-size:18px;margin:0}.brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}.langbox{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}.langbox select{background:white;border:1px solid var(--line);border-radius:10px;padding:9px;color:var(--ink)}
+main{max-width:1220px;margin:0 auto;padding:24px 22px 42px}.hero{background:linear-gradient(120deg,#174d37,#218557);color:white;padding:26px;border-radius:22px;display:flex;justify-content:space-between;gap:24px;align-items:center;box-shadow:var(--shadow)}.hero h2{font-size:clamp(24px,3vw,34px);line-height:1.12;margin:0 0 10px}.hero p{margin:0;max-width:650px;color:#e4f5ea}.hero .tag{display:inline-flex;background:#ffffff20;border:1px solid #ffffff35;border-radius:999px;padding:6px 10px;font-size:12px;margin-bottom:13px}.hero-art{font-size:65px;min-width:90px;text-align:center}.notice{margin:15px 0 22px;background:var(--amberbg);color:#70470b;border:1px solid #f0d9a4;border-radius:12px;padding:11px 14px;font-size:13px}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:25px 0 12px}.sectionhead h2{font-size:19px;margin:0}.sectionhead p{font-size:12px;color:var(--muted);margin:3px 0 0}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);min-width:0}.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}.cardtitle{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.cardtitle h3{margin:0;font-size:16px}.icon{font-size:21px}.muted{color:var(--muted)}.small{font-size:12px}.big{font-size:32px;font-weight:760;letter-spacing:-1px}.unit{font-size:14px;color:var(--muted);font-weight:500;letter-spacing:0}.pill{font-size:11px;font-weight:700;border-radius:999px;padding:5px 8px;background:#e7f5ec;color:var(--green);white-space:nowrap}.pill.warn{background:var(--amberbg);color:var(--amber)}.pill.danger{background:var(--redbg);color:var(--red)}.bar{height:9px;border-radius:99px;background:#eaf0ec;overflow:hidden;margin:12px 0}.bar span{height:100%;display:block;background:var(--green2);border-radius:99px;transition:width .25s}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.btn-primary{background:var(--green);color:white}.btn-primary:hover{background:#105538}.btn-secondary{background:#eaf5ee;color:var(--green)}.btn-outline{background:white;border:1px solid var(--line);color:var(--ink)}.btn-stop{background:var(--red);color:white}.btn-small{padding:7px 10px;font-size:12px}.btnrow{display:flex;flex-wrap:wrap;gap:8px}.statusdot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#94a3a0;margin-right:5px}.statusdot.on{background:#1a9a5a}.statusdot.off{background:#98a7a0}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini{padding:12px;border-radius:12px;background:#f6faf7;border:1px solid #e8f0ea}.mini strong{display:block;font-size:18px;margin-top:3px}.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}.field label{font-size:12px;color:var(--muted);font-weight:650}.field input,.field select,.field textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink)}.field textarea{min-height:70px;resize:vertical}.chatlog{display:flex;flex-direction:column;gap:10px;max-height:310px;overflow:auto;padding:2px 0 12px}.bubble{padding:11px 13px;border-radius:14px;max-width:92%;font-size:14px;white-space:pre-wrap}.bubble.bot{background:#f0f7f2;border:1px solid #e0eee4;align-self:flex-start}.bubble.user{background:#176b45;color:white;align-self:flex-end}.chatcomposer{display:flex;gap:8px}.chatcomposer input{flex:1;min-width:0;padding:11px;border:1px solid var(--line);border-radius:12px}.chatcomposer button{padding:10px 12px}.featurechips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.chip{background:#f3f8f4;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--ink)}.chip:hover{border-color:#92c6a6}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:650;font-size:11px;text-transform:uppercase;letter-spacing:.04em}.net{font-size:22px;font-weight:760;color:var(--green)}.photo-preview{display:none;width:100%;max-height:190px;object-fit:contain;border-radius:12px;background:#f3f6f4;margin-top:10px}.footer{margin-top:24px;color:var(--muted);font-size:12px;text-align:center}.inlinecheck{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}.inlinecheck input{accent-color:var(--green)}
+@media(max-width:900px){.span-3,.span-4{grid-column:span 6}.span-5,.span-7,.span-8{grid-column:span 12}.hero-art{display:none}}
+@media(max-width:600px){.topinner{padding:12px 14px;align-items:flex-start}.brand p{display:none}.langbox{flex-direction:column;align-items:flex-end;font-size:11px}.langbox select{max-width:135px}.topinner{gap:8px}main{padding:16px 13px 30px}.hero{padding:21px}.span-3,.span-4,.span-6,.span-12{grid-column:span 12}.card{padding:15px}.big{font-size:28px}.two-col{grid-template-columns:1fr 1fr}}
+
+.service-icon-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:4px}
+.service-icon-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;min-width:0}
+.service-icon{width:66px;height:66px;display:grid;place-items:center;border-radius:20px;background:#e7f5ec;font-size:32px;border:1px solid #d5eadc}
+.service-icon-card h3{margin:2px 0 0;font-size:16px}
+.service-icon-card p{font-size:12px;color:var(--muted);margin:0;min-height:36px}
+.service-icon-card a{font-size:12px;color:var(--green);font-weight:700;text-decoration:none}
+.service-icon-card a:hover{text-decoration:underline}
+.service-icon-card button{margin-top:2px}
+@media(max-width:900px){.service-icon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.service-icon-grid{grid-template-columns:1fr 1fr;gap:9px}.service-icon-card{padding:14px 10px}.service-icon{width:54px;height:54px;font-size:27px}.service-icon-card p{min-height:54px}}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topinner">
+    <div class="brand"><div class="logo">🌱</div><div><h1>RythuMitra AI</h1><p id="tagline">Your multilingual farming companion</p></div></div>
+    <div class="langbox"><label for="language" id="langLabel">Language</label><select id="language" aria-label="Choose language">
+      <option value="te">తెలుగు</option><option value="hi">हिन्दी</option><option value="ta">தமிழ்</option><option value="kn">ಕನ್ನಡ</option><option value="en" selected>English</option>
+    </select></div>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div><div class="tag" id="heroTag">CONNECTED FARMING PROTOTYPE</div><h2 id="heroTitle">A smarter companion for your farm.</h2><p id="heroDesc">Monitor irrigation, ask farming questions, and compare market returns — all in one place.</p></div>
+    <div class="hero-art" aria-hidden="true">🌾</div>
+  </section>
+  <div class="notice" id="demoNotice">DEMO MODE: readings and market prices are sample data. The physical ESP32 and live AI/data services are not connected yet.</div>
+
+  <div class="sectionhead"><div><h2 id="overviewTitle">Farm overview</h2><p id="overviewSub">Simulated device readings for the first software milestone</p></div><button class="btn-outline btn-small" id="simulateBtn">Simulate new reading</button></div>
+  <div class="grid">
+    <section class="card span-3">
+      <div class="cardtitle"><h3 id="moistureTitle">Soil moisture</h3><span class="icon">💧</span></div>
+      <div class="row"><div class="big"><span id="moistureValue">32</span><span class="unit">%</span></div><span class="pill warn" id="moistureState">Needs water</span></div>
+      <div class="bar"><span id="moistureBar" style="width:32%"></span></div>
+      <div class="small muted" id="moistureNote">Illustrative calibrated value</div>
+    </section>
+    <section class="card span-3">
+      <div class="cardtitle"><h3 id="pumpTitle">Pump status</h3><span class="icon">⚡</span></div>
+      <div class="row"><div class="big" id="pumpValue">OFF</div><span class="pill" id="modePill">AUTO</span></div>
+      <p class="small muted" id="pumpNote">Local irrigation logic is simulated</p>
+      <div class="btnrow"><button class="btn-secondary btn-small" id="autoBtn">Automatic mode</button><button class="btn-outline btn-small" id="manualBtn">Manual mode</button></div><div class="btnrow" style="margin-top:9px"><button class="btn-outline btn-small" id="togglePumpBtn">Toggle pump (manual)</button><button class="btn-stop btn-small" id="stopPumpBtn">⛔ Stop pump</button></div>
+    </section>
+    <section class="card span-3">
+      <div class="cardtitle"><h3 id="waterTitle">Water flow</h3><span class="icon">🚿</span></div>
+      <div class="big"><span id="flowValue">0.0</span><span class="unit"> L/min</span></div>
+      <p class="small muted" id="flowNote">Simulated flow sensor value</p>
+      <div class="row"><span class="small muted" id="connectLabel">Device connection</span><span class="pill warn" id="deviceState">SIMULATED</span></div>
+      <div class="row" style="margin-top:10px"><span class="small muted">Arduino irrigation request</span><span class="pill warn" id="irrigationRequestState">WAITING</span></div>
+      <div class="row" style="margin-top:8px"><span class="small muted">Safety timeout</span><span class="pill" id="safetyState">NORMAL</span></div>
+    </section>
+    <section class="card span-3">
+      <div class="cardtitle"><h3 id="adviceTitle">Irrigation advice</h3><span class="icon">🌿</span></div>
+      <p id="adviceText">Soil looks dry in this demo. Check crop needs and the calibrated threshold.</p>
+      <button class="btn-outline btn-small" id="askIrrigationBtn">Ask assistant</button>
+    </section>
+  </div>
+
+  <div class="sectionhead"><div><h2>Weather for your farm</h2><p>Live conditions and a short forecast from Open-Meteo</p></div><span class="pill" id="weatherUpdated">Not loaded yet</span></div>
+  <section class="card" id="weatherCard" style="margin-bottom:22px">
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));align-items:end">
+      <div class="field" style="margin:0"><label for="weatherLocation">Village / town / district</label><input id="weatherLocation" type="text" placeholder="Enter your village or town" value=""></div>
+      <div class="field" style="margin:0"><label for="weatherCountry">Country (optional)</label><input id="weatherCountry" type="text" placeholder="e.g. India" value="India"></div>
+      <button class="btn-primary" id="weatherFetchBtn" type="button">Get live weather</button>
+    </div>
+    <p class="small muted" style="margin-top:10px">Enter the location where your farm is situated. Internet is required. Forecasts are estimates, not official severe-weather alerts.</p>
+    <div id="weatherStatus" class="small muted" aria-live="polite" style="margin-top:12px">Enter your farm location and select Get live weather.</div>
+    <div id="weatherResults" style="display:none;margin-top:16px">
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px">
+        <div class="card" style="background:var(--soft,#f3f8f4);padding:14px"><div class="small muted">Current weather</div><strong id="weatherCondition">—</strong></div>
+        <div class="card" style="background:var(--soft,#f3f8f4);padding:14px"><div class="small muted">Temperature</div><strong id="weatherTemp">—</strong></div>
+        <div class="card" style="background:var(--soft,#f3f8f4);padding:14px"><div class="small muted">Humidity</div><strong id="weatherHumidity">—</strong></div>
+        <div class="card" style="background:var(--soft,#f3f8f4);padding:14px"><div class="small muted">Wind</div><strong id="weatherWind">—</strong></div>
+        <div class="card" style="background:var(--soft,#f3f8f4);padding:14px"><div class="small muted">Rain chance next 24h (peak)</div><strong id="weatherRain">—</strong></div>
+      </div>
+      <h3 style="margin-top:18px">Farming guidance</h3><ul id="weatherAdvice" style="padding-left:22px"></ul>
+      <h3 style="margin-top:18px">Next 3 days</h3><div id="weatherDaily" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px"></div>
+      <p class="small muted" style="margin-top:12px">Source: Open-Meteo forecast API. Weather is grid-based and may differ from conditions at your exact field. <a href="https://open-meteo.com/" target="_blank" rel="noopener">About Open-Meteo</a>.</p>
+    </div>
+  </section>
+
+  <div class="sectionhead"><div><h2 id="assistantSectionTitle">Ask RythuMitra</h2><p id="assistantSub">Ask farming questions using the local AI service</p></div><span class="pill" id="voicePill">Voice support depends on browser</span></div>
+  <div class="grid">
+    <section class="card span-7">
+      <div class="cardtitle"><h3 id="chatTitle">Farming assistant</h3><span class="icon">💬</span></div>
+      <div class="chatlog" id="chatlog" aria-live="polite">
+        <div class="bubble bot" id="welcomeBubble">Hello! I'm the RythuMitra demo assistant. Ask about irrigation, soil health, crop care, livestock basics, schemes or market prices. My answers are examples until a real AI service is connected.</div>
+      </div>
+      <div class="featurechips">
+        <button class="chip" data-question="When should I water my crop?">💧 <span id="chipWater">When to water?</span></button>
+        <button class="chip" data-question="How do I understand a Soil Health Card?">🌱 <span id="chipSoil">Soil health</span></button>
+        <button class="chip" data-question="How can I compare market prices?">₹ <span id="chipPrice">Market prices</span></button>
+        <button class="chip" data-question="What should I do if my leaves have spots?">🍃 <span id="chipLeaf">Leaf spots</span></button>
+      </div>
+      <div class="chatcomposer"><input id="chatInput" placeholder="Type a farming question…" aria-label="Type a farming question"><button class="btn-primary" id="sendBtn">Send</button></div>
+      <div class="btnrow" style="margin-top:9px"><button class="btn-primary btn-small" id="micBtn" type="button">🎙️ <span id="micText">Speak and ask</span></button><button class="btn-outline btn-small" id="stopSpeechBtn" type="button">🔇 Stop speaking</button><button class="btn-outline btn-small" id="clearChatBtn" type="button">Clear chat</button></div>
+      <p class="small muted" id="speechStatus">Voice input/output availability depends on the browser and selected language.</p>
+    </section>
+    <section class="card span-5">
+      <div class="cardtitle"><h3 id="photoTitle">Leaf-photo screening</h3><span class="pill warn" id="photoPill">Planned feature</span></div>
+      <p class="small muted" id="photoDesc">Upload a leaf photo for reference, then describe the symptoms. The current local text AI uses your symptom description; it does not inspect the image itself.</p>
+      <div class="field"><label id="photoLabel" for="leafPhoto">Choose a leaf image (optional)</label><input type="file" id="leafPhoto" accept="image/*"></div>
+      <img id="photoPreview" class="photo-preview" alt="Selected leaf preview">
+      <div class="field"><label id="cropLabel" for="cropSelect">Crop</label><select id="cropSelect"><option>Cotton</option><option>Tomato</option><option>Chilli</option><option>Rice</option><option>Other / not sure</option></select></div>
+      <div class="field"><label for="cropSymptoms">What symptoms do you see?</label><textarea id="cropSymptoms" rows="3" placeholder="Example: yellow leaves with small brown spots; started 4 days ago."></textarea></div>
+      <div class="field"><label for="cropSpread">How is it spreading?</label><select id="cropSpread"><option value="one or a few leaves">One or a few leaves</option><option value="many leaves on one plant">Many leaves on one plant</option><option value="several plants">Several plants</option><option value="not sure">Not sure</option></select></div>
+      <button class="btn-secondary" id="photoAnalyzeBtn">Get crop-care guidance</button>
+      <p class="small muted" id="photoResult" style="margin-bottom:0">Guidance will be based on the symptoms you describe, not automatic photo diagnosis. For severe or spreading damage, consult a local agricultural officer.</p>
+    </section>
+  </div>
+
+  <div class="sectionhead"><div><h2>Farmer Services</h2><p>Choose a service icon to open an official portal or ask RythuMitra AI for help</p></div><span class="pill">Farmer support</span></div>
+  <section id="schemesCard" class="service-icon-grid" aria-label="Government schemes and farmer assistance">
+    <article class="service-icon-card">
+      <div class="service-icon" aria-hidden="true">💰</div>
+      <h3>PM-KISAN</h3>
+      <p>Income-support scheme information and beneficiary status.</p>
+      <a href="https://pmkisan.gov.in/" target="_blank" rel="noopener noreferrer">Official portal ↗</a>
+      <button class="btn-outline btn-small schemeAsk" data-scheme="PM-KISAN">Ask AI</button>
+    </article>
+    <article class="service-icon-card">
+      <div class="service-icon" aria-hidden="true">🛡️</div>
+      <h3>Crop Insurance</h3>
+      <p>Check crop-insurance information, enrollment and claims.</p>
+      <a href="https://pmfby.gov.in/" target="_blank" rel="noopener noreferrer">Official portal ↗</a>
+      <button class="btn-outline btn-small schemeAsk" data-scheme="Pradhan Mantri Fasal Bima Yojana (PMFBY)">Ask AI</button>
+    </article>
+    <article class="service-icon-card">
+      <div class="service-icon" aria-hidden="true">🌱</div>
+      <h3>Soil Health</h3>
+      <p>Understand soil-test results and soil-health guidance.</p>
+      <a href="https://soilhealth.dac.gov.in/" target="_blank" rel="noopener noreferrer">Official portal ↗</a>
+      <button class="btn-outline btn-small schemeAsk" data-scheme="Soil Health Card">Ask AI</button>
+    </article>
+    <article class="service-icon-card">
+      <div class="service-icon" aria-hidden="true">🧺</div>
+      <h3>e-NAM Market</h3>
+      <p>Explore the National Agriculture Market resources.</p>
+      <a href="https://enam.gov.in/" target="_blank" rel="noopener noreferrer">Official portal ↗</a>
+      <button class="btn-outline btn-small schemeAsk" data-scheme="e-NAM National Agriculture Market">Ask AI</button>
+    </article>
+  </section>
+  <p class="small muted" style="margin:10px 0 24px">Official links are starting points, not confirmation of eligibility. Verify current benefits, deadlines and documents on the official portal or with your local agriculture office. Never share OTPs, passwords, Aadhaar or bank details in the chatbot.</p>
+
+  <div class="sectionhead"><div><h2 id="priceSectionTitle">FairPrice advisor</h2><p id="priceSub">Example numbers — replace with verified market data before real use</p></div></div>
+  <div class="grid">
+    <section class="card span-5">
+      <div class="cardtitle"><h3 id="priceCalcTitle">Estimate net returns</h3><span class="icon">🧮</span></div>
+      <div class="field"><label id="cropNameLabel" for="priceCrop">Crop</label><select id="priceCrop"><option value="Tomato">Tomato</option><option value="Chilli">Chilli</option><option value="Cotton">Cotton</option><option value="Rice">Rice</option><option value="Onion">Onion</option></select></div>
+      <div class="field"><label id="quantityLabel" for="quantity">Quantity (quintals)</label><input id="quantity" type="number" min="0" value="10"></div>
+      <div class="field"><label id="marketALabel" for="priceA">Market A price (₹/quintal)</label><input id="priceA" type="number" min="0" value="2200"></div>
+      <div class="field"><label id="costALabel" for="costA">Market A costs (₹ total)</label><input id="costA" type="number" min="0" value="1200"></div>
+      <div class="field"><label id="marketBLabel" for="priceB">Market B price (₹/quintal)</label><input id="priceB" type="number" min="0" value="2450"></div>
+      <div class="field"><label id="costBLabel" for="costB">Market B costs (₹ total)</label><input id="costB" type="number" min="0" value="2200"></div>
+      <button class="btn-primary" id="calculateBtn">Compare net returns</button>
+    </section>
+    <section class="card span-7">
+      <div class="cardtitle"><h3 id="comparisonTitle">Comparison result</h3><span class="pill warn" id="samplePill">SAMPLE DATA</span></div>
+      <div class="tablewrap"><table><thead><tr><th id="marketHead">Market</th><th id="grossHead">Gross revenue</th><th id="costHead">Costs</th><th id="netHead">Estimated net</th></tr></thead><tbody id="priceRows"><tr><td>Market A</td><td>₹22,000</td><td>₹1,200</td><td>₹20,800</td></tr><tr><td>Market B</td><td>₹24,500</td><td>₹2,200</td><td>₹22,300</td></tr></tbody></table></div>
+      <div class="mini" style="margin-top:15px"><div class="small muted" id="bestMarketLabel">Better estimated return</div><div class="net" id="bestMarket">Market B · ₹22,300</div><p class="small muted" id="priceDisclaimer" style="margin-bottom:0">This is a calculation example, not a live price recommendation. Confirm price, quality, fees and transport before selling.</p></div>
+    </section>
+  </div>
+  <div class="footer" id="footerText">RythuMitra AI starter · Demo mode · No live AI, market API or ESP32 connection yet.</div>
+</main>
+<script>
+const translations = {
+en:{
+tagline:"Your multilingual farming companion",langLabel:"Language",heroTag:"CONNECTED FARMING PROTOTYPE",heroTitle:"A smarter companion for your farm.",heroDesc:"Monitor irrigation, ask farming questions, and compare market returns — all in one place.",demoNotice:"HARDWARE TEST MODE: soil readings and irrigation request come from the Arduino. No physical water pump is connected; water flow, AI replies and market prices remain demo data.",overviewTitle:"Farm overview",overviewSub:"Live Arduino sensor readings and irrigation request",simulateBtn:"Simulate new reading",moistureTitle:"Soil moisture",moistureState:"Needs water",moistureNote:"Illustrative calibrated value",pumpTitle:"Irrigation request",pumpNote:"Arduino request only — no physical pump connected",autoBtn:"Automatic mode",manualBtn:"Manual mode",waterTitle:"Water flow",flowNote:"Simulated flow sensor value",connectLabel:"Device connection",deviceState:"SIMULATED",adviceTitle:"Irrigation advice",adviceText:"Soil looks dry in this demo. Check crop needs and the calibrated threshold.",askIrrigationBtn:"Ask assistant",assistantSectionTitle:"Ask RythuMitra",assistantSub:"Ask farming questions using the local AI service",chatTitle:"Farming assistant",voicePill:"Voice support depends on browser",welcomeBubble:"Hello! I'm the RythuMitra demo assistant. Ask about irrigation, soil health, crop care, livestock basics, schemes or market prices. My answers are examples until a real AI service is connected.",chipWater:"When to water?",chipSoil:"Soil health",chipPrice:"Market prices",chipLeaf:"Leaf spots",chatPlaceholder:"Type a farming question…",sendBtn:"Send",micText:"Speak",clearChatBtn:"Clear chat",speechStatus:"Tap Speak and ask, allow microphone access, and hear the AI answer. Voice support depends on your browser and installed voices.",photoTitle:"Leaf-photo screening",photoPill:"Planned feature",photoDesc:"Upload a leaf photo to preview the interface. This starter does not diagnose diseases yet.",photoLabel:"Choose a leaf image",cropLabel:"Crop (for future model)",photoAnalyzeBtn:"Preview screening workflow",photoResult:"No image analyzed. A real model must be integrated and validated before diagnosis is shown.",priceSectionTitle:"FairPrice advisor",priceSub:"Example numbers — replace with verified market data before real use",priceCalcTitle:"Estimate net returns",cropNameLabel:"Crop",quantityLabel:"Quantity (quintals)",marketALabel:"Market A price (₹/quintal)",costALabel:"Market A costs (₹ total)",marketBLabel:"Market B price (₹/quintal)",costBLabel:"Market B costs (₹ total)",calculateBtn:"Compare net returns",comparisonTitle:"Comparison result",samplePill:"SAMPLE DATA",marketHead:"Market",grossHead:"Gross revenue",costHead:"Costs",netHead:"Estimated net",bestMarketLabel:"Better estimated return",priceDisclaimer:"This is a calculation example, not a live price recommendation. Confirm price, quality, fees and transport before selling.",footerText:"RythuMitra AI · Arduino sensor integration test · AI, market prices and water flow are still demo features.",togglePumpBtn:"Toggle pump (manual)",stopPumpBtn:"⛔ Stop pump",pumpOn:"ON",pumpOff:"OFF",needsWater:"Needs water",moistureOK:"Moisture OK",pumpStopped:"Pump stopped by user",autoStarted:"Automatic irrigation started (simulation).",autoStopped:"Automatic irrigation stopped (simulation).",manualOn:"Demo pump switched ON manually.",manualOff:"Demo pump switched OFF manually.",modeAuto:"AUTO",modeManual:"MANUAL",askIrrigation:"Please explain whether watering is needed using the current demo moisture reading.",photoNoFile:"Please select a leaf image first.",photoFuture:"Photo preview is ready, but no disease model is connected. Do not treat this as a diagnosis.",speechUnsupported:"Speech recognition is not supported in this browser. Try a compatible browser or type your question.",listening:"Listening… speak now.",speechError:"Could not capture speech. Please try again or type your question.",noQuestion:"Please type a question first.",examplePrefix:"Demo response (not live AI): ",genericAnswer:"I can help with irrigation, crop care, soil health, livestock basics, government support and market-price calculations. Please add your crop, location and symptoms when relevant. This is a sample response until a real AI service and verified knowledge sources are connected.",waterAnswer:"The demo soil-moisture reading is {moisture}%. The local demo rule uses a threshold of 35%, so the simulation may request irrigation. Real thresholds must be calibrated for the crop and soil.",soilAnswer:"For soil fertility, use a laboratory soil test or Soil Health Card. A moisture sensor does not measure nitrogen, phosphorus, potassium or pH. Follow crop-specific recommendations from a reliable agricultural source.",priceAnswer:"Use the FairPrice panel to enter the latest verified market prices, expected quantity and costs. The result is an estimate after entered costs, not a guaranteed sale price.",leafAnswer:"Leaf spots can have several causes, including disease, pests, nutrient issues or environmental stress. The photo model is not connected in this starter. Share the crop and symptoms, and seek local agricultural expertise if the problem spreads.",bestA:"Market A",bestB:"Market B",tie:"Both markets have the same estimated net return",netResult:"Estimated net return",quantityError:"Enter a quantity greater than zero and non-negative prices/costs.",speechStart:"Start speaking"
+},
+te:{
+tagline:"మీ బహుభాషా వ్యవసాయ సహాయకుడు",langLabel:"భాష",heroTag:"కనెక్ట్ అయిన వ్యవసాయ నమూనా",heroTitle:"మీ వ్యవసాయానికి తెలివైన సహాయకుడు.",heroDesc:"నీటి పారుదలను గమనించండి, వ్యవసాయ ప్రశ్నలు అడగండి, మార్కెట్ ఆదాయాన్ని పోల్చండి — అన్నీ ఒకే చోట.",demoNotice:"డెమో మోడ్: చూపించే సెన్సర్ రీడింగ్‌లు, మార్కెట్ ధరలు నమూనా మాత్రమే. ESP32, నిజమైన AI లేదా లైవ్ డేటా ఇంకా కనెక్ట్ కాలేదు.",overviewTitle:"పొలం వివరాలు",overviewSub:"మొదటి సాఫ్ట్‌వేర్ దశ కోసం అనుకరణ రీడింగ్‌లు",simulateBtn:"కొత్త రీడింగ్ చూపించు",moistureTitle:"నేల తేమ",moistureState:"నీరు అవసరం కావచ్చు",moistureNote:"ఉదాహరణ విలువ",pumpTitle:"మోటార్ స్థితి",pumpNote:"స్థానిక నీటి నియంత్రణ అనుకరణ మాత్రమే",autoBtn:"ఆటోమేటిక్ మోడ్",manualBtn:"మాన్యువల్ మోడ్",waterTitle:"నీటి ప్రవాహం",flowNote:"అనుకరణ ప్రవాహ విలువ",connectLabel:"పరికర కనెక్షన్",deviceState:"అనుకరణ",adviceTitle:"నీటి సలహా",adviceText:"ఈ డెమోలో నేల పొడిగా ఉంది. పంట అవసరాలు, సరిచేసిన తేమ పరిమితిని పరిశీలించండి.",askIrrigationBtn:"AIని అడగండి",assistantSectionTitle:"రైతుమిత్రను అడగండి",assistantSub:"ఇది డెమో చాట్ — నిజమైన AI సేవ ఇంకా కనెక్ట్ కాలేదు",chatTitle:"వ్యవసాయ సహాయకుడు",voicePill:"వాయిస్ సౌకర్యం బ్రౌజర్‌పై ఆధారపడి ఉంటుంది",welcomeBubble:"నమస్కారం! ఇది రైతుమిత్ర డెమో సహాయకుడు. నీటి పారుదల, నేల ఆరోగ్యం, పంట సంరక్షణ, పశుసంరక్షణ, పథకాలు లేదా మార్కెట్ ధరల గురించి అడగండి. నిజమైన AI సేవ కలిపే వరకు సమాధానాలు ఉదాహరణలు మాత్రమే.",chipWater:"ఎప్పుడు నీరు పెట్టాలి?",chipSoil:"నేల ఆరోగ్యం",chipPrice:"మార్కెట్ ధరలు",chipLeaf:"ఆకుల మచ్చలు",chatPlaceholder:"వ్యవసాయ ప్రశ్న టైప్ చేయండి…",sendBtn:"పంపు",micText:"మాట్లాడు",clearChatBtn:"చాట్ క్లియర్",speechStatus:"వాయిస్ సదుపాయం బ్రౌజర్, భాషపై ఆధారపడి ఉంటుంది.",photoTitle:"ఆకు ఫోటో పరిశీలన",photoPill:"తరువాతి ఫీచర్",photoDesc:"వెబ్‌సైట్ రూపాన్ని పరీక్షించడానికి ఆకు ఫోటో అప్‌లోడ్ చేయండి. ఈ వెర్షన్ వ్యాధిని నిర్ధారించదు.",photoLabel:"ఆకు ఫోటో ఎంచుకోండి",cropLabel:"పంట (భవిష్యత్ మోడల్ కోసం)",photoAnalyzeBtn:"పరిశీలన విధానం చూడండి",photoResult:"ఫోటో విశ్లేషణ జరగలేదు. ఫలితం చూపే ముందు నిజమైన మోడల్‌ను కలిపి పరీక్షించాలి.",priceSectionTitle:"ఫెయిర్‌ప్రైస్ సలహాదారు",priceSub:"ఉదాహరణ సంఖ్యలు — నిజంగా ఉపయోగించే ముందు ధృవీకరించిన ధరలు నమోదు చేయండి",priceCalcTitle:"నికర ఆదాయం అంచనా",cropNameLabel:"పంట",quantityLabel:"పరిమాణం (క్వింటాళ్లు)",marketALabel:"మార్కెట్ A ధర (₹/క్వింటాల్)",costALabel:"మార్కెట్ A ఖర్చులు (మొత్తం ₹)",marketBLabel:"మార్కెట్ B ధర (₹/క్వింటాల్)",costBLabel:"మార్కెట్ B ఖర్చులు (మొత్తం ₹)",calculateBtn:"నికర ఆదాయం పోల్చు",comparisonTitle:"పోలిక ఫలితం",samplePill:"నమూనా డేటా",marketHead:"మార్కెట్",grossHead:"మొత్తం ఆదాయం",costHead:"ఖర్చులు",netHead:"అంచనా నికర ఆదాయం",bestMarketLabel:"మెరుగైన అంచనా ఆదాయం",priceDisclaimer:"ఇది లెక్కింపు ఉదాహరణ మాత్రమే, నిజమైన ధర సలహా కాదు. అమ్మకానికి ముందు ధర, నాణ్యత, ఫీజులు, రవాణా ఖర్చులు నిర్ధారించండి.",footerText:"రైతుమిత్ర AI ప్రారంభ వెర్షన్ · డెమో మోడ్ · నిజమైన AI, మార్కెట్ API, ESP32 కనెక్షన్ ఇంకా లేదు.",togglePumpBtn:"మోటార్ మార్చు (మాన్యువల్)",stopPumpBtn:"⛔ మోటార్ ఆపు",pumpOn:"ఆన్",pumpOff:"ఆఫ్",needsWater:"నీరు అవసరం కావచ్చు",moistureOK:"తేమ సరిపోతుంది",pumpStopped:"వినియోగదారు మోటార్ ఆపారు",autoStarted:"ఆటోమేటిక్ నీటి పారుదల ప్రారంభమైంది (అనుకరణ).",autoStopped:"ఆటోమేటిక్ నీటి పారుదల ఆగింది (అనుకరణ).",manualOn:"డెమో మోటార్ మాన్యువల్‌గా ఆన్ అయింది.",manualOff:"డెమో మోటార్ మాన్యువల్‌గా ఆఫ్ అయింది.",modeAuto:"ఆటో",modeManual:"మాన్యువల్",askIrrigation:"ప్రస్తుత డెమో నేల తేమను బట్టి నీరు అవసరమా వివరించండి.",photoNoFile:"ముందుగా ఆకు ఫోటో ఎంచుకోండి.",photoFuture:"ఫోటో ప్రివ్యూ సిద్ధంగా ఉంది; వ్యాధి మోడల్ కనెక్ట్ కాలేదు. దీన్ని నిర్ధారణగా భావించవద్దు.",speechUnsupported:"ఈ బ్రౌజర్‌లో వాయిస్ గుర్తింపు అందుబాటులో లేదు. అనుకూల బ్రౌజర్ ప్రయత్నించండి లేదా టైప్ చేయండి.",listening:"వింటున్నాం… మాట్లాడండి.",speechError:"వాయిస్ అందలేదు. మళ్లీ ప్రయత్నించండి లేదా టైప్ చేయండి.",noQuestion:"ముందుగా ప్రశ్న టైప్ చేయండి.",examplePrefix:"డెమో సమాధానం (నిజమైన AI కాదు): ",genericAnswer:"నీటి పారుదల, పంట సంరక్షణ, నేల ఆరోగ్యం, పశుసంరక్షణ, ప్రభుత్వ సహాయం, మార్కెట్ ధరల లెక్కింపులో సహాయపడగలను. అవసరమైనప్పుడు పంట, ప్రాంతం, లక్షణాలు చెప్పండి. నిజమైన AI మరియు ధృవీకరించిన సమాచారం కలిపే వరకు ఇది నమూనా సమాధానం.",waterAnswer:"డెమో నేల తేమ {moisture}%గా ఉంది. అనుకరణ నియమం 35% పరిమితిని ఉపయోగిస్తుంది, కాబట్టి నీరు అవసరమని సూచించవచ్చు. నిజమైన పరిమితిని పంట, నేల ఆధారంగా సరిచేయాలి.",soilAnswer:"నేల సారాన్ని తెలుసుకోవడానికి ప్రయోగశాల పరీక్ష లేదా Soil Health Card ఉపయోగించండి. తేమ సెన్సర్ నైట్రజన్, ఫాస్ఫరస్, పొటాషియం లేదా pH కొలవదు. నమ్మకమైన వ్యవసాయ వనరుల పంట-ప్రత్యేక సిఫార్సులు అనుసరించండి.",priceAnswer:"FairPriceలో తాజా ధృవీకరించిన మార్కెట్ ధరలు, పరిమాణం, ఖర్చులు నమోదు చేయండి. ఫలితం నమోదు చేసిన ఖర్చుల తర్వాతి అంచనా మాత్రమే; హామీ ధర కాదు.",leafAnswer:"ఆకుల మచ్చలకు వ్యాధి, పురుగులు, పోషకాల లోపం లేదా వాతావరణ ఒత్తిడి వంటి కారణాలు ఉండవచ్చు. ఈ ప్రారంభ వెర్షన్‌లో ఫోటో మోడల్ లేదు. పంట, లక్షణాలు చెప్పండి; సమస్య పెరిగితే స్థానిక వ్యవసాయ నిపుణుడిని సంప్రదించండి.",bestA:"మార్కెట్ A",bestB:"మార్కెట్ B",tie:"రెండు మార్కెట్ల అంచనా నికర ఆదాయం సమానం",netResult:"అంచనా నికర ఆదాయం",quantityError:"సున్నా కంటే ఎక్కువ పరిమాణం, ప్రతికూలం కాని ధరలు/ఖర్చులు నమోదు చేయండి.",speechStart:"మాట్లాడటం ప్రారంభించండి"
+},
+hi:{
+tagline:"आपका बहुभाषी खेती सहायक",langLabel:"भाषा",heroTag:"जुड़ा हुआ कृषि प्रोटोटाइप",heroTitle:"आपके खेत के लिए एक स्मार्ट साथी।",heroDesc:"सिंचाई देखें, खेती के सवाल पूछें और बाजार से संभावित आय की तुलना करें — सब एक जगह।",demoNotice:"डेमो मोड: रीडिंग और बाजार भाव नमूना डेटा हैं। ESP32, लाइव AI और डेटा सेवाएँ अभी जुड़ी नहीं हैं।",overviewTitle:"खेत का अवलोकन",overviewSub:"पहले सॉफ्टवेयर चरण के लिए सिम्युलेटेड रीडिंग",simulateBtn:"नई रीडिंग दिखाएँ",moistureTitle:"मिट्टी की नमी",moistureState:"पानी की जरूरत हो सकती है",moistureNote:"उदाहरण मान",pumpTitle:"पंप की स्थिति",pumpNote:"स्थानीय सिंचाई लॉजिक सिम्युलेटेड है",autoBtn:"ऑटो मोड",manualBtn:"मैनुअल मोड",waterTitle:"पानी का प्रवाह",flowNote:"सिम्युलेटेड प्रवाह मान",connectLabel:"डिवाइस कनेक्शन",deviceState:"सिम्युलेटेड",adviceTitle:"सिंचाई सलाह",adviceText:"इस डेमो में मिट्टी सूखी दिखती है। फसल की जरूरत और कैलिब्रेट की गई सीमा जाँचें।",askIrrigationBtn:"सहायक से पूछें",assistantSectionTitle:"रिथुमित्र से पूछें",assistantSub:"डेमो चैट — लाइव AI सेवा अभी जुड़ी नहीं है",chatTitle:"खेती सहायक",voicePill:"वॉइस सुविधा ब्राउज़र पर निर्भर है",welcomeBubble:"नमस्ते! मैं रिथुमित्र डेमो सहायक हूँ। सिंचाई, मिट्टी, फसल देखभाल, पशुपालन, योजनाओं या बाजार भाव के बारे में पूछें। असली AI जुड़ने तक उत्तर उदाहरण हैं।",chipWater:"कब पानी दें?",chipSoil:"मिट्टी की सेहत",chipPrice:"बाजार भाव",chipLeaf:"पत्तों पर धब्बे",chatPlaceholder:"खेती का सवाल लिखें…",sendBtn:"भेजें",micText:"बोलें",clearChatBtn:"चैट साफ़ करें",speechStatus:"वॉइस सुविधा ब्राउज़र और चुनी भाषा पर निर्भर है।",photoTitle:"पत्ती फोटो जाँच",photoPill:"आगे की सुविधा",photoDesc:"इंटरफ़ेस देखने के लिए पत्ती की फोटो अपलोड करें। यह संस्करण बीमारी का निदान नहीं करता।",photoLabel:"पत्ती की तस्वीर चुनें",cropLabel:"फसल (भविष्य के मॉडल के लिए)",photoAnalyzeBtn:"जाँच प्रक्रिया देखें",photoResult:"फोटो का विश्लेषण नहीं हुआ। निदान दिखाने से पहले असली मॉडल जोड़कर जाँचना होगा।",priceSectionTitle:"फेयरप्राइस सलाहकार",priceSub:"उदाहरण संख्याएँ — वास्तविक उपयोग से पहले सत्यापित भाव दर्ज करें",priceCalcTitle:"शुद्ध आय का अनुमान",cropNameLabel:"फसल",quantityLabel:"मात्रा (क्विंटल)",marketALabel:"बाजार A भाव (₹/क्विंटल)",costALabel:"बाजार A खर्च (कुल ₹)",marketBLabel:"बाजार B भाव (₹/क्विंटल)",costBLabel:"बाजार B खर्च (कुल ₹)",calculateBtn:"शुद्ध आय की तुलना करें",comparisonTitle:"तुलना का परिणाम",samplePill:"नमूना डेटा",marketHead:"बाजार",grossHead:"कुल बिक्री",costHead:"खर्च",netHead:"अनुमानित शुद्ध",bestMarketLabel:"बेहतर अनुमानित आय",priceDisclaimer:"यह गणना का उदाहरण है, लाइव भाव की सलाह नहीं। बेचने से पहले भाव, गुणवत्ता, शुल्क और परिवहन की पुष्टि करें।",footerText:"रिथुमित्र AI स्टार्टर · डेमो मोड · लाइव AI, बाजार API या ESP32 कनेक्शन नहीं है।",togglePumpBtn:"पंप बदलें (मैनुअल)",stopPumpBtn:"⛔ पंप रोकें",pumpOn:"चालू",pumpOff:"बंद",needsWater:"पानी की जरूरत हो सकती है",moistureOK:"नमी ठीक",pumpStopped:"उपयोगकर्ता ने पंप रोका",autoStarted:"ऑटो सिंचाई शुरू (सिम्युलेशन)।",autoStopped:"ऑटो सिंचाई बंद (सिम्युलेशन)।",manualOn:"डेमो पंप मैन्युअल रूप से चालू।",manualOff:"डेमो पंप मैन्युअल रूप से बंद।",modeAuto:"ऑटो",modeManual:"मैन्युअल",askIrrigation:"मौजूदा डेमो नमी के आधार पर बताएं कि पानी चाहिए या नहीं।",photoNoFile:"पहले पत्ती की फोटो चुनें।",photoFuture:"फोटो प्रीव्यू तैयार है, लेकिन बीमारी मॉडल जुड़ा नहीं है। इसे निदान न मानें।",speechUnsupported:"इस ब्राउज़र में वॉइस पहचान उपलब्ध नहीं है। अनुकूल ब्राउज़र आज़माएँ या टाइप करें।",listening:"सुन रहा है… अब बोलें।",speechError:"आवाज़ नहीं मिली। फिर कोशिश करें या टाइप करें।",noQuestion:"पहले सवाल लिखें।",examplePrefix:"डेमो उत्तर (लाइव AI नहीं): ",genericAnswer:"मैं सिंचाई, फसल देखभाल, मिट्टी, पशुपालन की बुनियादी जानकारी, सरकारी सहायता और बाजार मूल्य की गणना में मदद कर सकता हूँ। जरूरत हो तो फसल, स्थान और लक्षण बताएँ। असली AI और सत्यापित स्रोत जुड़ने तक यह नमूना उत्तर है।",waterAnswer:"डेमो मिट्टी नमी {moisture}% है। सिम्युलेशन 35% सीमा उपयोग करता है, इसलिए सिंचाई की जरूरत दिखा सकता है। वास्तविक सीमा फसल और मिट्टी के अनुसार कैलिब्रेट करें।",soilAnswer:"मिट्टी की उर्वरता के लिए प्रयोगशाला परीक्षण या Soil Health Card देखें। नमी सेंसर नाइट्रोजन, फॉस्फोरस, पोटैशियम या pH नहीं मापता। विश्वसनीय कृषि स्रोत की फसल-विशिष्ट सलाह अपनाएँ।",priceAnswer:"FairPrice में सत्यापित भाव, मात्रा और खर्च दर्ज करें। परिणाम खर्चों के बाद अनुमान है, सुनिश्चित बिक्री मूल्य नहीं।",leafAnswer:"पत्तों के धब्बे रोग, कीट, पोषक कमी या मौसम के तनाव से हो सकते हैं। इस स्टार्टर में फोटो मॉडल नहीं जुड़ा है। फसल और लक्षण बताएँ; समस्या बढ़े तो कृषि विशेषज्ञ से संपर्क करें।",bestA:"बाजार A",bestB:"बाजार B",tie:"दोनों बाजारों की अनुमानित शुद्ध आय समान है",netResult:"अनुमानित शुद्ध आय",quantityError:"शून्य से अधिक मात्रा और गैर-ऋणात्मक भाव/खर्च दर्ज करें।",speechStart:"बोलना शुरू करें"
+},
+ta:{
+tagline:"உங்கள் பல்மொழி விவசாய உதவியாளர்",langLabel:"மொழி",heroTag:"இணைக்கப்பட்ட விவசாய முன்மாதிரி",heroTitle:"உங்கள் பண்ணைக்கான புத்திசாலி துணை.",heroDesc:"நீர்ப்பாசனத்தை கண்காணிக்கவும், விவசாயக் கேள்விகளைக் கேட்கவும், சந்தை வருவாயை ஒப்பிடவும் — அனைத்தும் ஒரே இடத்தில்.",demoNotice:"டெமோ: காட்டப்படும் அளவீடுகளும் சந்தை விலைகளும் மாதிரி தரவு. ESP32, நேரடி AI மற்றும் தரவு சேவைகள் இன்னும் இணைக்கப்படவில்லை.",overviewTitle:"பண்ணை நிலவரம்",overviewSub:"முதல் மென்பொருள் கட்டத்திற்கான உருவக அளவீடுகள்",simulateBtn:"புதிய அளவீடு",moistureTitle:"மண் ஈரப்பதம்",moistureState:"நீர் தேவைப்படலாம்",moistureNote:"உதாரண மதிப்பு",pumpTitle:"பம்ப் நிலை",pumpNote:"உள்ளூர் நீர்ப்பாசன விதிகள் உருவகப்படுத்தப்படுகின்றன",autoBtn:"தானியங்கி முறை",manualBtn:"கைமுறை",waterTitle:"நீர் ஓட்டம்",flowNote:"உருவக ஓட்ட மதிப்பு",connectLabel:"சாதன இணைப்பு",deviceState:"உருவகம்",adviceTitle:"நீர்ப்பாசன ஆலோசனை",adviceText:"இந்த டெமோவில் மண் உலர்ந்துள்ளது. பயிர் தேவையையும் அளவுத்திருத்த வரம்பையும் சரிபார்க்கவும்.",askIrrigationBtn:"உதவியாளரிடம் கேளுங்கள்",assistantSectionTitle:"ரైతுமித்ராவிடம் கேளுங்கள்",assistantSub:"டெமோ உரையாடல் — நேரடி AI இன்னும் இணைக்கப்படவில்லை",chatTitle:"விவசாய உதவியாளர்",voicePill:"குரல் ஆதரவு உலாவியைப் பொறுத்தது",welcomeBubble:"வணக்கம்! இது ரைத்துமித்ரா டெமோ உதவியாளர். நீர்ப்பாசனம், மண் ஆரோக்கியம், பயிர் பராமரிப்பு, கால்நடை அடிப்படைகள், திட்டங்கள் அல்லது சந்தை விலைகள் பற்றி கேளுங்கள். உண்மையான AI இணைக்கப்படும் வரை பதில்கள் எடுத்துக்காட்டுகள்.",chipWater:"எப்போது நீர்?",chipSoil:"மண் ஆரோக்கியம்",chipPrice:"சந்தை விலை",chipLeaf:"இலைப் புள்ளிகள்",chatPlaceholder:"விவசாயக் கேள்வியைத் தட்டச்சு செய்யவும்…",sendBtn:"அனுப்பு",micText:"பேசுங்கள்",clearChatBtn:"அரட்டையை அழிக்கவும்",speechStatus:"குரல் வசதி உலாவி மற்றும் தேர்ந்தெடுத்த மொழியைப் பொறுத்தது.",photoTitle:"இலைப் புகைப்பட ஆய்வு",photoPill:"பின்னர் சேர்க்கப்படும்",photoDesc:"இடைமுகத்தைப் பார்க்க இலைப் புகைப்படத்தைப் பதிவேற்றவும். இந்த பதிப்பு நோயைக் கண்டறியாது.",photoLabel:"இலைப் படத்தைத் தேர்வு செய்யவும்",cropLabel:"பயிர் (எதிர்கால மாதிரிக்காக)",photoAnalyzeBtn:"ஆய்வு செயல்முறையைப் பார்க்கவும்",photoResult:"படம் பகுப்பாய்வு செய்யப்படவில்லை. நோயறிதலுக்கு முன் உண்மையான மாதிரியை இணைத்து சரிபார்க்க வேண்டும்.",priceSectionTitle:"FairPrice ஆலோசகர்",priceSub:"எடுத்துக்காட்டு எண்கள் — உண்மையான பயன்பாட்டிற்கு முன் சரிபார்க்கப்பட்ட விலைகளை உள்ளிடவும்",priceCalcTitle:"நிகர வருமான மதிப்பீடு",cropNameLabel:"பயிர்",quantityLabel:"அளவு (குவிண்டால்)",marketALabel:"சந்தை A விலை (₹/குவிண்டால்)",costALabel:"சந்தை A செலவுகள் (மொத்தம் ₹)",marketBLabel:"சந்தை B விலை (₹/குவிண்டால்)",costBLabel:"சந்தை B செலவுகள் (மொத்தம் ₹)",calculateBtn:"நிகர வருமானத்தை ஒப்பிடு",comparisonTitle:"ஒப்பீட்டு முடிவு",samplePill:"மாதிரி தரவு",marketHead:"சந்தை",grossHead:"மொத்த வருவாய்",costHead:"செலவுகள்",netHead:"மதிப்பிடப்பட்ட நிகரம்",bestMarketLabel:"சிறந்த மதிப்பிடப்பட்ட வருவாய்",priceDisclaimer:"இது கணக்கீட்டு எடுத்துக்காட்டு; நேரடி விலை பரிந்துரை அல்ல. விற்பதற்கு முன் விலை, தரம், கட்டணம் மற்றும் போக்குவரத்தை உறுதிப்படுத்தவும்.",footerText:"RythuMitra AI தொடக்க பதிப்பு · டெமோ முறை · நேரடி AI, சந்தை API அல்லது ESP32 இணைப்பு இல்லை.",togglePumpBtn:"பம்பை மாற்று (கைமுறை)",stopPumpBtn:"⛔ பம்பை நிறுத்து",pumpOn:"இயக்கு",pumpOff:"நிறுத்து",needsWater:"நீர் தேவைப்படலாம்",moistureOK:"ஈரப்பதம் சரி",pumpStopped:"பம்ப் பயனரால் நிறுத்தப்பட்டது",autoStarted:"தானியங்கி நீர்ப்பாசனம் தொடங்கியது (உருவகம்).",autoStopped:"தானியங்கி நீர்ப்பாசனம் நிறுத்தப்பட்டது (உருவகம்).",manualOn:"டெமோ பம்ப் கைமுறையாக இயக்கப்பட்டது.",manualOff:"டெமோ பம்ப் கைமுறையாக நிறுத்தப்பட்டது.",modeAuto:"தானியங்கி",modeManual:"கைமுறை",askIrrigation:"தற்போதைய டெமோ ஈரப்பதத்தின் அடிப்படையில் நீர் தேவைப்படுகிறதா என்பதை விளக்கவும்.",photoNoFile:"முதலில் இலைப் படத்தைத் தேர்ந்தெடுக்கவும்.",photoFuture:"புகைப்பட முன்னோட்டம் தயாராக உள்ளது; நோய் மாதிரி இணைக்கப்படவில்லை. இதை நோயறிதலாகக் கருத வேண்டாம்.",speechUnsupported:"இந்த உலாவியில் குரல் அடையாளம் ஆதரிக்கப்படவில்லை. இணக்கமான உலாவியை முயற்சிக்கவும் அல்லது தட்டச்சு செய்யவும்.",listening:"கேட்கிறது… இப்போது பேசுங்கள்.",speechError:"குரலைப் பெற முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது தட்டச்சு செய்யவும்.",noQuestion:"முதலில் கேள்வியை உள்ளிடவும்.",examplePrefix:"டெமோ பதில் (நேரடி AI அல்ல): ",genericAnswer:"நீர்ப்பாசனம், பயிர் பராமரிப்பு, மண் ஆரோக்கியம், அடிப்படை கால்நடை பராமரிப்பு, அரசு உதவி மற்றும் சந்தை விலை கணக்கீட்டில் உதவ முடியும். தேவையானபோது பயிர், இடம், அறிகுறிகளைச் சொல்லவும். உண்மையான AI இணைக்கப்படும் வரை இது மாதிரி பதில்.",waterAnswer:"டெமோ மண் ஈரப்பதம் {moisture}%. உருவக விதி 35% வரம்பைப் பயன்படுத்துகிறது; எனவே நீர்ப்பாசனம் தேவை எனக் காட்டலாம். உண்மையான வரம்பை பயிர் மற்றும் மண்ணுக்கு ஏற்ப அளவுத்திருத்தம் செய்ய வேண்டும்.",soilAnswer:"மண் வளத்திற்காக ஆய்வக மண் பரிசோதனை அல்லது Soil Health Card பயன்படுத்தவும். ஈரப்பத சென்சார் N, P, K அல்லது pH அளவிடாது. நம்பகமான வேளாண் ஆதாரங்களின் பயிர்-சார்ந்த பரிந்துரைகளைப் பின்பற்றவும்.",priceAnswer:"FairPrice-ல் சரிபார்க்கப்பட்ட சந்தை விலை, அளவு மற்றும் செலவுகளை உள்ளிடவும். முடிவு செலவுகளுக்குப் பிந்தைய மதிப்பீடு; உறுதியான விற்பனை விலை அல்ல.",leafAnswer:"இலைப் புள்ளிகளுக்கு நோய், பூச்சி, ஊட்டச்சத்து குறைபாடு அல்லது சுற்றுச்சூழல் அழுத்தம் காரணமாக இருக்கலாம். இந்த தொடக்க பதிப்பில் பட மாதிரி இல்லை. பயிர் மற்றும் அறிகுறிகளைப் பகிரவும்; பிரச்சினை அதிகரித்தால் வேளாண் நிபுணரை அணுகவும்.",bestA:"சந்தை A",bestB:"சந்தை B",tie:"இரு சந்தைகளின் மதிப்பிடப்பட்ட நிகர வருவாய் சமம்",netResult:"மதிப்பிடப்பட்ட நிகர வருவாய்",quantityError:"பூஜ்ஜியத்தை விட அதிக அளவும் எதிர்மறையற்ற விலை/செலவுகளையும் உள்ளிடவும்.",speechStart:"பேசத் தொடங்குங்கள்"
+},
+kn:{
+tagline:"ನಿಮ್ಮ ಬಹುಭಾಷಾ ಕೃಷಿ ಸಹಾಯಕ",langLabel:"ಭಾಷೆ",heroTag:"ಸಂಪರ್ಕಿತ ಕೃಷಿ ಮಾದರಿ",heroTitle:"ನಿಮ್ಮ ಹೊಲಕ್ಕೆ ಸ್ಮಾರ್ಟ್ ಸಹಾಯಕ.",heroDesc:"ನೀರಾವರಿ ಗಮನಿಸಿ, ಕೃಷಿ ಪ್ರಶ್ನೆಗಳನ್ನು ಕೇಳಿ ಮತ್ತು ಮಾರುಕಟ್ಟೆ ಆದಾಯವನ್ನು ಹೋಲಿಸಿ — ಎಲ್ಲವೂ ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ.",demoNotice:"ಡೆಮೊ ಮೋಡ್: ತೋರಿಸಿರುವ ಓದುಗಳು ಮತ್ತು ಮಾರುಕಟ್ಟೆ ಬೆಲೆಗಳು ಮಾದರಿ ಡೇಟಾ. ESP32, ಲೈವ್ AI ಮತ್ತು ಡೇಟಾ ಸೇವೆಗಳು ಇನ್ನೂ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ.",overviewTitle:"ಹೊಲದ ಅವಲೋಕನ",overviewSub:"ಮೊದಲ ಸಾಫ್ಟ್‌ವೇರ್ ಹಂತದ ಅನುಕರಿಸಿದ ಓದುಗಳು",simulateBtn:"ಹೊಸ ಓದು ತೋರಿಸಿ",moistureTitle:"ಮಣ್ಣಿನ ತೇವಾಂಶ",moistureState:"ನೀರು ಬೇಕಾಗಬಹುದು",moistureNote:"ಉದಾಹರಣೆ ಮೌಲ್ಯ",pumpTitle:"ಪಂಪ್ ಸ್ಥಿತಿ",pumpNote:"ಸ್ಥಳೀಯ ನೀರಾವರಿ ನಿಯಮಗಳು ಅನುಕರಣೆ",autoBtn:"ಸ್ವಯಂಚಾಲಿತ ಮೋಡ್",manualBtn:"ಕೈಚಾಲಿತ ಮೋಡ್",waterTitle:"ನೀರಿನ ಹರಿವು",flowNote:"ಅನುಕರಿಸಿದ ಹರಿವಿನ ಮೌಲ್ಯ",connectLabel:"ಸಾಧನ ಸಂಪರ್ಕ",deviceState:"ಅನುಕರಣೆ",adviceTitle:"ನೀರಾವರಿ ಸಲಹೆ",adviceText:"ಈ ಡೆಮೊದಲ್ಲಿ ಮಣ್ಣು ಒಣವಾಗಿದೆ. ಬೆಳೆ ಅಗತ್ಯ ಮತ್ತು ಕ್ಯಾಲಿಬ್ರೇಟ್ ಮಾಡಿದ ಮಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ.",askIrrigationBtn:"ಸಹಾಯಕರನ್ನು ಕೇಳಿ",assistantSectionTitle:"ರೈತುಮಿತ್ರನನ್ನು ಕೇಳಿ",assistantSub:"ಡೆಮೊ ಚಾಟ್ — ಲೈವ್ AI ಸೇವೆ ಇನ್ನೂ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ",chatTitle:"ಕೃಷಿ ಸಹಾಯಕ",voicePill:"ಧ್ವನಿ ಬೆಂಬಲ ಬ್ರೌಸರ್ ಮೇಲೆ ಅವಲಂಬಿತ",welcomeBubble:"ನಮಸ್ಕಾರ! ನಾನು ರೈತುಮಿತ್ರ ಡೆಮೊ ಸಹಾಯಕ. ನೀರಾವರಿ, ಮಣ್ಣಿನ ಆರೋಗ್ಯ, ಬೆಳೆ ಆರೈಕೆ, ಪಶುಪಾಲನೆ, ಯೋಜನೆಗಳು ಅಥವಾ ಮಾರುಕಟ್ಟೆ ಬೆಲೆಗಳ ಬಗ್ಗೆ ಕೇಳಿ. ನಿಜವಾದ AI ಸಂಪರ್ಕಿಸುವವರೆಗೆ ಉತ್ತರಗಳು ಉದಾಹರಣೆಗಳು ಮಾತ್ರ.",chipWater:"ಯಾವಾಗ ನೀರು?",chipSoil:"ಮಣ್ಣಿನ ಆರೋಗ್ಯ",chipPrice:"ಮಾರುಕಟ್ಟೆ ಬೆಲೆ",chipLeaf:"ಎಲೆ ಕಲೆಗಳು",chatPlaceholder:"ಕೃಷಿ ಪ್ರಶ್ನೆ ಟೈಪ್ ಮಾಡಿ…",sendBtn:"ಕಳುಹಿಸಿ",micText:"ಮಾತನಾಡಿ",clearChatBtn:"ಚಾಟ್ ತೆರವು",speechStatus:"ಧ್ವನಿ ಲಭ್ಯತೆ ಬ್ರೌಸರ್ ಮತ್ತು ಆಯ್ದ ಭಾಷೆಯನ್ನು ಅವಲಂಬಿಸಿದೆ.",photoTitle:"ಎಲೆ ಫೋಟೋ ಪರಿಶೀಲನೆ",photoPill:"ಮುಂದಿನ ವೈಶಿಷ್ಟ್ಯ",photoDesc:"ಇಂಟರ್ಫೇಸ್ ನೋಡಲು ಎಲೆಯ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ. ಈ ಆವೃತ್ತಿ ರೋಗ ನಿರ್ಣಯ ಮಾಡುವುದಿಲ್ಲ.",photoLabel:"ಎಲೆಯ ಚಿತ್ರ ಆಯ್ಕೆಮಾಡಿ",cropLabel:"ಬೆಳೆ (ಭವಿಷ್ಯದ ಮಾದರಿಗೆ)",photoAnalyzeBtn:"ಪರಿಶೀಲನೆ ವಿಧಾನ ನೋಡಿ",photoResult:"ಚಿತ್ರ ವಿಶ್ಲೇಷಣೆ ಆಗಿಲ್ಲ. ರೋಗನಿರ್ಣಯ ತೋರಿಸುವ ಮೊದಲು ನಿಜವಾದ ಮಾದರಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ ಪರೀಕ್ಷಿಸಬೇಕು.",priceSectionTitle:"FairPrice ಸಲಹೆಗಾರ",priceSub:"ಉದಾಹರಣೆ ಸಂಖ್ಯೆಗಳು — ನಿಜವಾದ ಬಳಕೆಗೆ ಮೊದಲು ಪರಿಶೀಲಿಸಿದ ಬೆಲೆಗಳನ್ನು ನಮೂದಿಸಿ",priceCalcTitle:"ನಿವ್ವಳ ಆದಾಯ ಅಂದಾಜು",cropNameLabel:"ಬೆಳೆ",quantityLabel:"ಪ್ರಮಾಣ (ಕ್ವಿಂಟಲ್)",marketALabel:"ಮಾರುಕಟ್ಟೆ A ಬೆಲೆ (₹/ಕ್ವಿಂಟಲ್)",costALabel:"ಮಾರುಕಟ್ಟೆ A ವೆಚ್ಚ (ಒಟ್ಟು ₹)",marketBLabel:"ಮಾರುಕಟ್ಟೆ B ಬೆಲೆ (₹/ಕ್ವಿಂಟಲ್)",costBLabel:"ಮಾರುಕಟ್ಟೆ B ವೆಚ್ಚ (ಒಟ್ಟು ₹)",calculateBtn:"ನಿವ್ವಳ ಆದಾಯ ಹೋಲಿಸಿ",comparisonTitle:"ಹೋಲಿಕೆ ಫಲಿತಾಂಶ",samplePill:"ಮಾದರಿ ಡೇಟಾ",marketHead:"ಮಾರುಕಟ್ಟೆ",grossHead:"ಒಟ್ಟು ಆದಾಯ",costHead:"ವೆಚ್ಚ",netHead:"ಅಂದಾಜು ನಿವ್ವಳ",bestMarketLabel:"ಉತ್ತಮ ಅಂದಾಜು ಆದಾಯ",priceDisclaimer:"ಇದು ಲೆಕ್ಕಾಚಾರದ ಉದಾಹರಣೆ; ಲೈವ್ ಬೆಲೆ ಸಲಹೆ ಅಲ್ಲ. ಮಾರಾಟಕ್ಕೂ ಮೊದಲು ಬೆಲೆ, ಗುಣಮಟ್ಟ, ಶುಲ್ಕ ಮತ್ತು ಸಾರಿಗೆಯನ್ನು ದೃಢಪಡಿಸಿ.",footerText:"ರೈತುಮಿತ್ರ AI ಆರಂಭಿಕ ಆವೃತ್ತಿ · ಡೆಮೊ ಮೋಡ್ · ಲೈವ್ AI, ಮಾರುಕಟ್ಟೆ API ಅಥವಾ ESP32 ಸಂಪರ್ಕವಿಲ್ಲ.",togglePumpBtn:"ಪಂಪ್ ಬದಲಿಸಿ (ಕೈಚಾಲಿತ)",stopPumpBtn:"⛔ ಪಂಪ್ ನಿಲ್ಲಿಸಿ",pumpOn:"ಆನ್",pumpOff:"ಆಫ್",needsWater:"ನೀರು ಬೇಕಾಗಬಹುದು",moistureOK:"ತೇವಾಂಶ ಸರಿಯಾಗಿದೆ",pumpStopped:"ಬಳಕೆದಾರರು ಪಂಪ್ ನಿಲ್ಲಿಸಿದರು",autoStarted:"ಸ್ವಯಂಚಾಲಿತ ನೀರಾವರಿ ಆರಂಭವಾಗಿದೆ (ಅನುಕರಣೆ).",autoStopped:"ಸ್ವಯಂಚಾಲಿತ ನೀರಾವರಿ ನಿಂತಿದೆ (ಅನುಕರಣೆ).",manualOn:"ಡೆಮೊ ಪಂಪ್ ಕೈಯಾರೆ ಆನ್ ಮಾಡಲಾಗಿದೆ.",manualOff:"ಡೆಮೊ ಪಂಪ್ ಕೈಯಾರೆ ಆಫ್ ಮಾಡಲಾಗಿದೆ.",modeAuto:"ಸ್ವಯಂ",modeManual:"ಕೈಚಾಲಿತ",askIrrigation:"ಪ್ರಸ್ತುತ ಡೆಮೊ ತೇವಾಂಶದ ಆಧಾರದ ಮೇಲೆ ನೀರು ಬೇಕೇ ಎಂದು ವಿವರಿಸಿ.",photoNoFile:"ಮೊದಲು ಎಲೆಯ ಚಿತ್ರ ಆಯ್ಕೆಮಾಡಿ.",photoFuture:"ಫೋಟೋ ಪೂರ್ವವೀಕ್ಷಣೆ ಸಿದ್ಧವಾಗಿದೆ, ಆದರೆ ರೋಗ ಮಾದರಿ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ. ಇದನ್ನು ರೋಗನಿರ್ಣಯವೆಂದು ಪರಿಗಣಿಸಬೇಡಿ.",speechUnsupported:"ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಧ್ವನಿ ಗುರುತಿಸುವಿಕೆ ಬೆಂಬಲವಿಲ್ಲ. ಹೊಂದಾಣಿಕೆಯ ಬ್ರೌಸರ್ ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ಟೈಪ್ ಮಾಡಿ.",listening:"ಕೇಳುತ್ತಿದೆ… ಈಗ ಮಾತನಾಡಿ.",speechError:"ಧ್ವನಿ ಪಡೆಯಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ಟೈಪ್ ಮಾಡಿ.",noQuestion:"ಮೊದಲು ಪ್ರಶ್ನೆ ಟೈಪ್ ಮಾಡಿ.",examplePrefix:"ಡೆಮೊ ಉತ್ತರ (ಲೈವ್ AI ಅಲ್ಲ): ",genericAnswer:"ನೀರಾವರಿ, ಬೆಳೆ ಆರೈಕೆ, ಮಣ್ಣಿನ ಆರೋಗ್ಯ, ಮೂಲ ಪಶುಪಾಲನೆ, ಸರ್ಕಾರಿ ನೆರವು ಮತ್ತು ಮಾರುಕಟ್ಟೆ ಬೆಲೆ ಲೆಕ್ಕಾಚಾರದಲ್ಲಿ ಸಹಾಯ ಮಾಡಬಹುದು. ಅಗತ್ಯವಿದ್ದರೆ ಬೆಳೆ, ಸ್ಥಳ ಮತ್ತು ಲಕ್ಷಣಗಳನ್ನು ತಿಳಿಸಿ. ನಿಜವಾದ AI ಸಂಪರ್ಕಿಸುವವರೆಗೆ ಇದು ಮಾದರಿ ಉತ್ತರ.",waterAnswer:"ಡೆಮೊ ಮಣ್ಣಿನ ತೇವಾಂಶ {moisture}%. ಅನುಕರಣೆ ನಿಯಮವು 35% ಮಿತಿಯನ್ನು ಬಳಸುತ್ತದೆ; ಆದ್ದರಿಂದ ನೀರಾವರಿ ಬೇಕೆಂದು ಸೂಚಿಸಬಹುದು. ನಿಜವಾದ ಮಿತಿಯನ್ನು ಬೆಳೆ ಮತ್ತು ಮಣ್ಣಿಗೆ ತಕ್ಕಂತೆ ಕ್ಯಾಲಿಬ್ರೇಟ್ ಮಾಡಬೇಕು.",soilAnswer:"ಮಣ್ಣಿನ ಫಲವತ್ತತೆಗೆ ಪ್ರಯೋಗಾಲಯ ಪರೀಕ್ಷೆ ಅಥವಾ Soil Health Card ಬಳಸಿ. ತೇವಾಂಶ ಸೆನ್ಸರ್ N, P, K ಅಥವಾ pH ಅಳೆಯುವುದಿಲ್ಲ. ವಿಶ್ವಾಸಾರ್ಹ ಕೃಷಿ ಮೂಲದ ಬೆಳೆ-ನಿರ್ದಿಷ್ಟ ಸಲಹೆ ಅನುಸರಿಸಿ.",priceAnswer:"FairPrice ನಲ್ಲಿ ಪರಿಶೀಲಿಸಿದ ಮಾರುಕಟ್ಟೆ ಬೆಲೆ, ಪ್ರಮಾಣ ಮತ್ತು ವೆಚ್ಚಗಳನ್ನು ನಮೂದಿಸಿ. ಫಲಿತಾಂಶವು ವೆಚ್ಚಗಳ ನಂತರದ ಅಂದಾಜು; ಖಚಿತ ಮಾರಾಟ ಬೆಲೆ ಅಲ್ಲ.",leafAnswer:"ಎಲೆ ಕಲೆಗಳಿಗೆ ರೋಗ, ಕೀಟ, ಪೋಷಕಾಂಶ ಕೊರತೆ ಅಥವಾ ಪರಿಸರ ಒತ್ತಡ ಕಾರಣವಾಗಬಹುದು. ಈ ಆರಂಭಿಕ ಆವೃತ್ತಿಯಲ್ಲಿ ಚಿತ್ರ ಮಾದರಿ ಇಲ್ಲ. ಬೆಳೆ ಮತ್ತು ಲಕ್ಷಣಗಳನ್ನು ತಿಳಿಸಿ; ಸಮಸ್ಯೆ ಹೆಚ್ಚಾದರೆ ಕೃಷಿ ತಜ್ಞರನ್ನು ಸಂಪರ್ಕಿಸಿ.",bestA:"ಮಾರುಕಟ್ಟೆ A",bestB:"ಮಾರುಕಟ್ಟೆ B",tie:"ಎರಡೂ ಮಾರುಕಟ್ಟೆಗಳ ಅಂದಾಜು ನಿವ್ವಳ ಆದಾಯ ಸಮಾನ",netResult:"ಅಂದಾಜು ನಿವ್ವಳ ಆದಾಯ",quantityError:"ಶೂನ್ಯಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಪ್ರಮಾಣ ಮತ್ತು ಋಣಾತ್ಮಕವಲ್ಲದ ಬೆಲೆ/ವೆಚ್ಚಗಳನ್ನು ನಮೂದಿಸಿ.",speechStart:"ಮಾತನಾಡಲು ಪ್ರಾರಂಭಿಸಿ"
+}
+};
+let lang="en", moisture=32, pumpOn=false, mode="auto", stopLatched=false;
+const $=id=>document.getElementById(id);
+const localeMap={en:"en-IN",te:"te-IN",hi:"hi-IN",ta:"ta-IN",kn:"kn-IN"};
+function t(k){return (translations[lang]&&translations[lang][k])||translations.en[k]||k}
+function setText(id,key){if($(id))$(id).textContent=t(key)}
+const labelMap={
+tagline:"tagline",langLabel:"langLabel",heroTag:"heroTag",heroTitle:"heroTitle",heroDesc:"heroDesc",demoNotice:"demoNotice",overviewTitle:"overviewTitle",overviewSub:"overviewSub",simulateBtn:"simulateBtn",moistureTitle:"moistureTitle",moistureState:"moistureState",moistureNote:"moistureNote",pumpTitle:"pumpTitle",pumpNote:"pumpNote",autoBtn:"autoBtn",manualBtn:"manualBtn",togglePumpBtn:"togglePumpBtn",stopPumpBtn:"stopPumpBtn",waterTitle:"waterTitle",flowNote:"flowNote",connectLabel:"connectLabel",deviceState:"deviceState",adviceTitle:"adviceTitle",adviceText:"adviceText",askIrrigationBtn:"askIrrigationBtn",assistantSectionTitle:"assistantSectionTitle",assistantSub:"assistantSub",chatTitle:"chatTitle",voicePill:"voicePill",welcomeBubble:"welcomeBubble",chipWater:"chipWater",chipSoil:"chipSoil",chipPrice:"chipPrice",chipLeaf:"chipLeaf",sendBtn:"sendBtn",micText:"micText",clearChatBtn:"clearChatBtn",speechStatus:"speechStatus",photoTitle:"photoTitle",photoPill:"photoPill",photoDesc:"photoDesc",photoLabel:"photoLabel",cropLabel:"cropLabel",photoAnalyzeBtn:"photoAnalyzeBtn",photoResult:"photoResult",priceSectionTitle:"priceSectionTitle",priceSub:"priceSub",priceCalcTitle:"priceCalcTitle",cropNameLabel:"cropNameLabel",quantityLabel:"quantityLabel",marketALabel:"marketALabel",costALabel:"costALabel",marketBLabel:"marketBLabel",costBLabel:"costBLabel",calculateBtn:"calculateBtn",comparisonTitle:"comparisonTitle",samplePill:"samplePill",marketHead:"marketHead",grossHead:"grossHead",costHead:"costHead",netHead:"netHead",bestMarketLabel:"bestMarketLabel",priceDisclaimer:"priceDisclaimer",footerText:"footerText"};
+function applyLanguage(){lang=$("language").value;document.documentElement.lang=lang;Object.entries(labelMap).forEach(([id,key])=>setText(id,key));$("chatInput").placeholder=t("chatPlaceholder");$("cropSelect").options[0].text=lang==="en"?"Cotton":lang==="te"?"పత్తి":lang==="hi"?"कपास":lang==="ta"?"பருத்தி":"ಹತ್ತಿ";updateDeviceUI();calculate(false)}
+function updateDeviceUI(){
+$("moistureValue").textContent=moisture;$("moistureBar").style.width=moisture+"%";
+$("moistureState").textContent=moisture<35?t("needsWater"):t("moistureOK");
+$("moistureState").className="pill "+(moisture<35?"warn":"");
+$("pumpValue").textContent=pumpOn?t("pumpOn"):t("pumpOff");
+$("pumpValue").style.color=pumpOn?"var(--green)":"var(--muted)";
+$("modePill").textContent=mode==="auto"?t("modeAuto"):t("modeManual");
+$("flowValue").textContent=pumpOn?"1.2":"0.0";
+$("adviceText").textContent=moisture<35?t("adviceText"):t("moistureOK");
+}
+function addBubble(text,who){let b=document.createElement("div");b.className="bubble "+who;b.textContent=text;$("chatlog").appendChild(b);$("chatlog").scrollTop=$("chatlog").scrollHeight}
+function botReply(question){
+let q=question.toLowerCase();
+let key="genericAnswer";
+if(/water|irrigat|moisture|నీరు|తేమ|पानी|सिंच|நீர்|ನೀರು/.test(q))key="waterAnswer";
+else if(/soil|fertil|health card|మట్టి|నేల|मिट्टी|உரம்|மண்|ಮಣ್ಣು/.test(q))key="soilAnswer";
+else if(/market|price|sell|ధర|మార్కెట్|कीमत|बाजार|விலை|ಬೆಲೆ/.test(q))key="priceAnswer";
+else if(/leaf|spot|disease|పత్తి|ఆకు|మచ్చ|पत्ती|रोग|இலை|ಕಲೆ/.test(q))key="leafAnswer";
+return t("examplePrefix")+t(key).replace("{moisture}",moisture);
+}
+function speakText(text){
+  if (!("speechSynthesis" in window) || !text) {
+    $("speechStatus").textContent = "Spoken replies are not supported by this browser. You can still read the answer.";
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = localeMap[lang] || "en-IN";
+  utterance.rate = 0.92;
+  utterance.onstart = () => { $("speechStatus").textContent = "Speaking the AI answer…"; };
+  utterance.onend = () => { $("speechStatus").textContent = "AI answer finished. You can ask another question."; };
+  utterance.onerror = () => { $("speechStatus").textContent = "Could not speak this answer. Read the text or try another installed voice."; };
+  window.speechSynthesis.speak(utterance);
+}
+
+async function sendQuestion(text, options={}){
+  text=(text||$("chatInput").value).trim();
+  if(!text){$("speechStatus").textContent=t("noQuestion");return}
+  addBubble(text,"user");
+  $("chatInput").value="";
+  const pending=addBubble(lang==="te"?"సమాధానం కోసం చూస్తున్నాను…":lang==="hi"?"जवाब खोज रहा हूँ…":lang==="ta"?"பதில் தேடப்படுகிறது…":lang==="kn"?"ಉತ್ತರ ಹುಡುಕಲಾಗುತ್ತಿದೆ…":"Thinking…","bot");
+  try{
+    const response=await fetch("http://127.0.0.1:8001/api/chat",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:text,language:({en:"English",te:"Telugu",hi:"Hindi",ta:"Tamil",kn:"Kannada"})[lang]||"English"})
+    });
+    const data=await response.json().catch(()=>({}));
+    if(pending && pending.parentNode) pending.remove();
+    if(!response.ok) throw new Error(data.error||`AI server returned HTTP ${response.status}`);
+    const answer=data.answer||"The AI returned an empty answer.";
+    addBubble(answer,"bot");
+    $("speechStatus").textContent=data.source||"Local AI response";
+    if(options.speakAnswer) speakText(answer);
+  }catch(err){
+    if(pending && pending.parentNode) pending.remove();
+    addBubble("I couldn't reach the AI service. Make sure the RythuMitra AI backend is running on this computer, then try again. Details: "+err.message,"bot");
+    $("speechStatus").textContent="AI connection unavailable";
+  }
+}
+
+const weatherCodeText = code => ({0:"Clear sky",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Depositing rime fog",51:"Light drizzle",53:"Moderate drizzle",55:"Dense drizzle",61:"Slight rain",63:"Moderate rain",65:"Heavy rain",71:"Slight snow",73:"Moderate snow",75:"Heavy snow",80:"Rain showers",81:"Moderate rain showers",82:"Violent rain showers",95:"Thunderstorm",96:"Thunderstorm with hail",99:"Thunderstorm with heavy hail"})[code] || "Variable conditions";
+async function loadFarmWeather(){
+  const place=$("weatherLocation").value.trim();
+  const country=$("weatherCountry").value.trim();
+  const status=$("weatherStatus"), btn=$("weatherFetchBtn"), results=$("weatherResults");
+  if(!place){status.textContent="Please enter your farm's village, town, or district.";$("weatherLocation").focus();return;}
+  btn.disabled=true; btn.textContent="Loading…"; status.textContent="Finding location and retrieving the forecast…";
+  try{
+    const query=[place,country].filter(Boolean).join(", ");
+    const geoUrl="https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(place)+"&count=8&language=en&format=json";
+    const geoResponse=await fetch(geoUrl);
+    if(!geoResponse.ok) throw new Error("Location search failed (HTTP "+geoResponse.status+").");
+    const geo=await geoResponse.json();
+    let matches=(geo.results||[]);
+    if(country) { const filtered=matches.filter(x=>(x.country||"").toLowerCase().includes(country.toLowerCase())); if(filtered.length) matches=filtered; }
+    if(!matches.length) throw new Error("Location not found. Try a nearby town or district name.");
+    const loc=matches[0];
+    const params=new URLSearchParams({latitude:loc.latitude,longitude:loc.longitude,current:"temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m",hourly:"precipitation_probability,precipitation,temperature_2m",daily:"weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",forecast_days:"3",timezone:"auto",wind_speed_unit:"kmh"});
+    const wxResponse=await fetch("https://api.open-meteo.com/v1/forecast?"+params.toString());
+    if(!wxResponse.ok) throw new Error("Weather service failed (HTTP "+wxResponse.status+"). Please try again.");
+    const wx=await wxResponse.json();
+    if(!wx.current) throw new Error("The weather service did not return current conditions.");
+    const c=wx.current, h=wx.hourly||{}, d=wx.daily||{};
+    $("weatherCondition").textContent=weatherCodeText(c.weather_code);
+    $("weatherTemp").textContent=Math.round(c.temperature_2m)+" °C"+(Number.isFinite(c.apparent_temperature)?" (feels "+Math.round(c.apparent_temperature)+"°)":"");
+    $("weatherHumidity").textContent=c.relative_humidity_2m+"%";
+    $("weatherWind").textContent=Math.round(c.wind_speed_10m)+" km/h";
+    const now=new Date(); let probs=(h.time||[]).map((t,i)=>({t:new Date(t),p:(h.precipitation_probability||[])[i]})).filter(x=>x.t>=now&&x.t<=new Date(now.getTime()+24*60*60*1000)&&Number.isFinite(x.p));
+    const peak=probs.length?Math.max(...probs.map(x=>x.p)):null;
+    $("weatherRain").textContent=peak===null?"Unavailable":peak+"%";
+    const advice=[];
+    if(peak!==null&&peak>=60) advice.push("Rain is possible in the next 24 hours. Check the latest local forecast and field drainage before scheduling irrigation.");
+    else if(peak!==null&&peak<=20) advice.push("The forecast shows a low rain chance over the next 24 hours; check soil conditions and crop stage before deciding whether to irrigate.");
+    else advice.push("Rain chances are mixed. Check the hourly forecast again before irrigation or spraying.");
+    if(c.temperature_2m>=35) advice.push("Hot conditions: inspect crops for heat stress and irrigate at cooler times if irrigation is needed and water is available.");
+    if(c.relative_humidity_2m>=80) advice.push("High humidity can favor some crop diseases. Inspect leaves and avoid unnecessary overhead watering; confirm any suspected disease before treatment.");
+    if(c.wind_speed_10m>=25) advice.push("Wind is fairly strong. Avoid spraying until local label conditions and wind speed are suitable to reduce drift.");
+    advice.push("Weather forecasts cannot replace checking soil moisture, crop needs, local advisories, or official severe-weather warnings.");
+    $("weatherAdvice").innerHTML=advice.map(x=>"<li>"+x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")+"</li>").join("");
+    $("weatherDaily").innerHTML=(d.time||[]).map((day,i)=>{const label=new Date(day+"T12:00:00").toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});return `<div class="card" style="padding:14px"><strong>${label}</strong><div style="margin-top:6px">${weatherCodeText(d.weather_code[i])}</div><div style="margin-top:6px">${Math.round(d.temperature_2m_min[i])}° – ${Math.round(d.temperature_2m_max[i])}°C</div><div class="small muted" style="margin-top:6px">Rain chance: ${d.precipitation_probability_max[i]??"—"}% · Rain: ${d.precipitation_sum[i]??0} mm</div></div>`}).join("");
+    results.style.display="block";
+    $("weatherUpdated").textContent="Live forecast loaded";
+    status.textContent="Showing forecast for "+[loc.name,loc.admin1,loc.country].filter(Boolean).join(", ")+" · local time zone: "+(wx.timezone||"provider default");
+  }catch(err){results.style.display="none";status.textContent="Could not load weather: "+err.message+" Check internet and try a nearby town or district.";$("weatherUpdated").textContent="Weather unavailable";}
+  finally{btn.disabled=false;btn.textContent="Get live weather";}
+}
+$("weatherFetchBtn").addEventListener("click",loadFarmWeather);
+$("weatherLocation").addEventListener("keydown",e=>{if(e.key==="Enter")loadFarmWeather()});
+
+$("language").addEventListener("change",applyLanguage);
+$("sendBtn").addEventListener("click",()=>sendQuestion());
+$("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendQuestion()});
+document.querySelectorAll("[data-question]").forEach(b=>b.addEventListener("click",()=>sendQuestion(b.dataset.question)));
+$("clearChatBtn").addEventListener("click",()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel();$("chatlog").innerHTML="";addBubble(t("welcomeBubble"),"bot")});
+$("askIrrigationBtn").addEventListener("click",()=>sendQuestion(t("askIrrigation")));
+document.querySelectorAll(".schemeAsk").forEach(button=>button.addEventListener("click",()=>{
+  const scheme=button.dataset.scheme;
+  sendQuestion("Explain "+scheme+" for a farmer in Telangana, India, in simple language. Tell me the purpose, who may be eligible, typical documents to check, how to verify current application dates and status through official sources, and where to get local help. Do not invent current benefit amounts, deadlines, or eligibility. Clearly say what must be verified on the official portal. Reply in the language currently selected on this website.");
+}));
+$("simulateBtn").addEventListener("click",()=>{
+  moisture=Math.max(8,Math.min(75,Math.round(moisture+(Math.random()>.5?1:-1)*(8+Math.random()*15))));
+  if(mode==="auto"&&!stopLatched){if(moisture<35)pumpOn=true;else if(moisture>=55)pumpOn=false;}
+  updateDeviceUI();
+});
+$("autoBtn").addEventListener("click",()=>{mode="auto";stopLatched=false;if(moisture<35)pumpOn=true;else if(moisture>=55)pumpOn=false;updateDeviceUI();addBubble(t(pumpOn?"autoStarted":"autoStopped"),"bot")});
+$("manualBtn").addEventListener("click",()=>{mode="manual";updateDeviceUI();addBubble(t("modeManual"),"bot")});
+$("pumpValue").title="Simulation only";
+$("pumpValue").addEventListener("click",()=>{if(mode==="manual"){pumpOn=!pumpOn;updateDeviceUI();addBubble(t(pumpOn?"manualOn":"manualOff"),"bot")}});
+$("togglePumpBtn").addEventListener("click",()=>{mode="manual";stopLatched=false;pumpOn=!pumpOn;updateDeviceUI();addBubble(t(pumpOn?"manualOn":"manualOff"),"bot")});
+$("stopPumpBtn").addEventListener("click",()=>{pumpOn=false;stopLatched=true;updateDeviceUI();addBubble(t("pumpStopped"),"bot")});
+$("photoAnalyzeBtn").addEventListener("click",()=>{
+  const crop=$("cropSelect").value;
+  const symptoms=$("cropSymptoms").value.trim();
+  const spread=$("cropSpread").value;
+  if(!symptoms){
+    $("photoResult").textContent="Please describe the visible symptoms first. The photo is only a preview in this version; it is not automatically analyzed.";
+    $("cropSymptoms").focus();
+    return;
+  }
+  const prompt="Act as a cautious agricultural crop-care assistant. Give symptom-based guidance, not a definitive diagnosis. Crop: "+crop+". Farmer-reported symptoms: "+symptoms+". Spread: "+spread+". Reply in the language currently selected in the RythuMitra website. Structure the answer as: (1) possible causes with uncertainty, (2) safe immediate steps, (3) what not to do without confirmation, (4) what additional observations would help, and (5) when to contact a local agricultural officer. Do not claim to have viewed or analyzed an uploaded image. Do not prescribe exact pesticide or chemical doses. Mention that symptoms alone cannot confirm a disease.";
+  $("photoResult").textContent="Sending the crop and symptom details to the local AI assistant…";
+  sendQuestion(prompt);
+});
+$("leafPhoto").addEventListener("change",()=>{const f=$("leafPhoto").files[0];if(!f)return;const img=$("photoPreview");if(img.src.startsWith("blob:"))URL.revokeObjectURL(img.src);img.src=URL.createObjectURL(f);img.style.display="block";$("photoResult").textContent="Photo preview loaded. Describe the symptoms below; this version does not analyze the image itself."});
+$("calculateBtn").addEventListener("click",()=>calculate(true));
+function money(n){return "₹"+Math.round(n).toLocaleString("en-IN")}
+function calculate(showError){
+const q=Number($("quantity").value),pa=Number($("priceA").value),ca=Number($("costA").value),pb=Number($("priceB").value),cb=Number($("costB").value);
+if(!Number.isFinite(q)||q<=0||![pa,ca,pb,cb].every(x=>Number.isFinite(x)&&x>=0)){if(showError)alert(t("quantityError"));return}
+const grossA=q*pa,grossB=q*pb,netA=grossA-ca,netB=grossB-cb;
+$("priceRows").innerHTML=`<tr><td>${t("bestA")}</td><td>${money(grossA)}</td><td>${money(ca)}</td><td><strong>${money(netA)}</strong></td></tr><tr><td>${t("bestB")}</td><td>${money(grossB)}</td><td>${money(cb)}</td><td><strong>${money(netB)}</strong></td></tr>`;
+$("bestMarket").textContent=netA===netB?t("tie"):(netA>netB?t("bestA")+" · "+money(netA):t("bestB")+" · "+money(netB));
+}
+let activeRecognition = null;
+$("micBtn").addEventListener("click",()=>{
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){$("speechStatus").textContent=t("speechUnsupported");return}
+ if(activeRecognition){try{activeRecognition.stop()}catch(e){} activeRecognition=null;return}
+ try{
+   const rec=new SR();
+   activeRecognition=rec;
+   rec.lang=localeMap[lang]||"en-IN";
+   rec.interimResults=false;
+   rec.maxAlternatives=1;
+   rec.continuous=false;
+   $("micBtn").disabled=true;
+   $("speechStatus").textContent=t("listening");
+   rec.onresult=e=>{
+     const transcript=(e.results && e.results[0] && e.results[0][0]) ? e.results[0][0].transcript.trim() : "";
+     if(!transcript){$("speechStatus").textContent=t("speechError");return}
+     $("chatInput").value=transcript;
+     sendQuestion(transcript,{speakAnswer:true});
+   };
+   rec.onerror=e=>{
+     const msg=e.error==="not-allowed" ? "Microphone permission was denied. Allow microphone access in your browser, or type your question." : t("speechError");
+     $("speechStatus").textContent=msg;
+   };
+   rec.onend=()=>{activeRecognition=null;$("micBtn").disabled=false;};
+   rec.start();
+ }catch(e){
+   activeRecognition=null;
+   $("micBtn").disabled=false;
+   $("speechStatus").textContent=t("speechUnsupported");
+ }
+});
+$("stopSpeechBtn").addEventListener("click",()=>{
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  if(activeRecognition){try{activeRecognition.stop()}catch(e){} activeRecognition=null;$("micBtn").disabled=false;}
+  $("speechStatus").textContent="Voice stopped. You can type a question or tap Speak and ask again.";
+});
+
+async function refreshSensorData() {
+  const device = $("deviceState");
+  const value = $("moistureValue");
+  const bar = $("moistureBar");
+  const state = $("moistureState");
+  const note = $("moistureNote");
+  const requestPill = $("irrigationRequestState");
+  const safetyPill = $("safetyState");
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/status", {
+      cache: "no-store"
+    });
+    if (!response.ok) throw new Error("API request failed");
+
+    const data = await response.json();
+
+    if (!data.connected || data.soilReading === null || data.soilReading === undefined) {
+      device.textContent = "WAITING";
+      device.className = "pill warn";
+      value.textContent = "--";
+      value.nextElementSibling.textContent = " raw";
+      bar.style.width = "0%";
+      state.textContent = "No reading";
+      state.className = "pill warn";
+      note.textContent = "Waiting for a valid Arduino reading.";
+      requestPill.textContent = "WAITING";
+      requestPill.className = "pill warn";
+      safetyPill.textContent = data.safetyTimeout ? "TIMEOUT" : "UNKNOWN";
+      safetyPill.className = data.safetyTimeout ? "pill danger" : "pill warn";
+      return;
+    }
+
+    const raw = Number(data.soilReading);
+    value.textContent = raw;
+    value.nextElementSibling.textContent = " raw";
+    // This is a raw-scale indicator, not a calibrated moisture percentage.
+    bar.style.width = Math.max(0, Math.min(100, raw / 1023 * 100)) + "%";
+
+    const soilStatus = String(data.soilStatus || "UNKNOWN").toUpperCase();
+    state.textContent = soilStatus;
+    state.className = "pill " + (soilStatus === "DRY" ? "warn" : soilStatus === "WET" ? "" : "warn");
+    note.textContent = "Live raw sensor reading from Arduino.";
+
+    const irrigation = String(data.irrigationRequest || "OFF").toUpperCase();
+    requestPill.textContent = irrigation;
+    requestPill.className = "pill " + (irrigation === "ON" ? "warn" : "");
+
+    // This card displays the Arduino's irrigation request, not actual pump operation.
+    $("pumpValue").textContent = irrigation === "ON" ? "ON" : "OFF";
+    $("pumpValue").style.color = irrigation === "ON" ? "var(--green)" : "var(--muted)";
+
+    const timedOut = Boolean(data.safetyTimeout);
+    safetyPill.textContent = timedOut ? "SAFETY TIMEOUT" : "NORMAL";
+    safetyPill.className = timedOut ? "pill danger" : "pill";
+
+    device.textContent = "CONNECTED";
+    device.className = "pill";
+  } catch (error) {
+    device.textContent = "API OFFLINE";
+    device.className = "pill danger";
+    value.textContent = "--";
+    value.nextElementSibling.textContent = " raw";
+    bar.style.width = "0%";
+    state.textContent = "Unavailable";
+    state.className = "pill danger";
+    note.textContent = "Start the Python bridge and check COM10.";
+    requestPill.textContent = "UNKNOWN";
+    requestPill.className = "pill warn";
+    safetyPill.textContent = "UNKNOWN";
+    safetyPill.className = "pill warn";
+  }
+}
+
+applyLanguage();
+refreshSensorData();
+setInterval(refreshSensorData, 2000);
+
+</script>
+</body>
+</html>
